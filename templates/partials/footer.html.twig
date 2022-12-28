@@ -1,0 +1,16 @@
+        <footer style="margin-top:100px;">
+            <p style='font-weight:bold;text-align:center'>
+                &copy; Blog Symfony made with 
+
+                <svg style="width:0.7rem;color:#dd1818;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="svg-inline--fa fa-heart fa-w-16 text-danger mx-1" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path></svg>
+
+                in Symfony by - 
+                
+                {#Pour ajouter le lien href je dois créer d'abord la page #}
+                <a href="{{path('app_home')}}" style='text-decoration:none'>me</a>
+                {#
+                Je lui donne le nom(name:) de la route qui est dans le controller ici app_about
+                Donc il va comprendre que pour accéder à cette page il va passer par cette route
+                #}
+            </p>
+        </footer>

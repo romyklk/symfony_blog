@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{category.name}} | {{parent()}} {% endblock %}
+
+{% block body %}
+	<div class="container" style="min-height:400px;">
+
+		<h1 class="text-center mt-5 mb-3 text-success">{{articles|length}} publiés dans la catégorie {{category.name}}</h1>
+
+
+		<div class="container d-flex flex-wrap justify-content-between">
+
+			{% for article in articles %}
+
+                {% set createdDate = article.createdAt %} {# on récupère la date de création de l'article #}
+                {% set difference = date( "now" | date() ).diff(date(createdDate)) %} {# on calcule la différence entre la date de création et la date actuelle #}
+                {% set nbdays = difference.days %} {# on récupère le nombre de jours #}
+
+
+				<div class="card mb-4 text-center shadow" style="width: 20rem;">
+					<img src="{{asset(article.imageUrl)}}" class="card-img-top" alt="image article {{article.title}}" style="aspect-ratio:3/2;">
+					<div class="card-body">
+						<h5 class="card-title">{{article.title}}</h5>
+
+                        <h6 class="card-subtitle mb-2 text-muted author-name">
+                        <img src="{{asset(article.author.profile.picture)}}" class="card-img-top rounded-circle" alt="profil {{article.author.fullname}}" style="width: 30px;">
+
+                        {{article.author.fullname}}
+                        </h6>
+
+                        <footer class="blockquote-footer">Il y a {{nbdays}} jours</footer>
+						<a href="/article/{{article.slug}}" class="btn btn-primary">Lire</a>
+					</div>
+				</div>
+
+			{% endfor %}
+
+
+		</div>
+
+
+	</div>
+
+{% endblock %}
