@@ -14,30 +14,30 @@
 			<!-- ajout cdn bootstrap-->
 			{#             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> #}
 
-            <!-- ajout bootstrap depuis le dossier public-->
-            <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+			<!-- ajout bootstrap depuis le dossier public-->
+			<link
+			rel="stylesheet" href="/assets/css/bootstrap.min.css"> <!-- ajout de la feuille de style depuis le dossier public-->
+			<link rel="stylesheet" href="/assets/css/style.css">
+		{% endblock %}
 
-			<!-- ajout de la feuille de style depuis le dossier public-->
-		    <link rel="stylesheet" href="/assets/css/style.css"> {% endblock %}
+	</head>
+	<body>
+		<div class="container-fluid">
+
+			{% include "partials/header.html.twig" %}
+
+			{% block body %}{% endblock %}
+
+
+			{% include "partials/footer.html.twig" %}
+		</div>
+
 
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
 
-            <!-- ajout du js depuis le dossier public-->
-            <script src="/assets/js/bootstrap.bundle.min.js"></script>
+			<!-- ajout du js depuis le dossier public-->
+			<script src="/assets/js/bootstrap.bundle.min.js"></script>
 		{% endblock %}
-	</head>
-	<body>
-		<div class="container-fluid"> 
-
-        {% include "partials/header.html.twig" %}
-        
-            {% block body %}{% endblock %}
-
-
-		{% include "partials/footer.html.twig" %}
-		</div>
-
-
-		</body>
-	</html>
+	</body>
+</html>

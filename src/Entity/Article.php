@@ -40,6 +40,8 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
+    private ?string $imageFile = null; // Pour l'ajout d'image
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -157,6 +159,26 @@ class Article
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageFile
+     */ 
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set the value of imageFile
+     *
+     * @return  self
+     */ 
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
 
         return $this;
     }

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'article |
+	{{parent()}}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+
+	<style>
+		.select2-container--default .select2-selection--multiple .select2-selection__choice {
+			background-color: #007bff;
+			color: #fff;
+			font-weight: 600;
+		}
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            color: #fff;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+            color: #fff;
+            background-color: red;
+        }
+
+        {#Ajout du style sur l'élement qui a la classe ckeditor (ckeditor)#}
+
+        .ck-editor__editable_inline {
+            min-height: 200px;
+        }
+	</style>
+
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-8 m-auto">
+				{{ include('article/_form.html.twig',{title:'Ajouter un article'}) }}
+			</div>
+
+
+		</div>
+
+
+		<a href="{{ path('app_article_index') }}" class='btn btn-outline-info'>Retour</a>
+
+
+	{% endblock %}
+
+	{% block javascripts %}
+		{{ parent() }}
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+		<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+		<script>
+			// Ajout du script sur l'élement qui a la classe choice_select (select2) pour
+$(document).ready(function () {
+$('.choice_select').select2();
+});
+
+// Ajout du script sur l'élement qui a la classe ckeditor (ckeditor)
+
+ClassicEditor.create(document.querySelector('#article_content')).then(editor => {
+console.log(editor);
+}).catch(error => {
+console.error(error);
+});
+		</script>
+	{% endblock %}

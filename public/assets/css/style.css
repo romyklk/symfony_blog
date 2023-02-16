@@ -2,3 +2,10 @@
 .author-name{
     color: #6F1E51 !important;
 }
+
+.listcircle ul li{
+    list-style: none;
+    margin-top: -15px;
+    margin-left: -20px;
+}
+

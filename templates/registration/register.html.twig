@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription | {{parent()}}
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 m-auto">
+				<h1 class='mb-3 text-center'>Inscription</h1>
+				<section class='shadow p-3 bg-light'>
+					{{ form_start(registrationForm) }}
+					<div class="text-danger listcircle">
+						{{ form_widget(registrationForm.full_name) }}
+						{{ form_errors(registrationForm.full_name) }}
+					</div>
+
+					<div class="text-danger listcircle">
+					{{ form_widget(registrationForm.email) }}
+					{{ form_errors(registrationForm.email) }}
+					</div>
+
+					<div class="text-danger listcircle">
+					{{ form_widget(registrationForm.phone) }}
+					{{ form_errors(registrationForm.phone) }}
+					</div>
+
+					<div class="text-danger listcircle">
+					{{ form_widget(registrationForm.plainPassword, {label: 'Password'}) }}
+					{{ form_errors(registrationForm.plainPassword) }}
+					</div>
+
+					<div class="text-danger listcircle  mb-3">
+						{{ form_widget(registrationForm.agreeTerms) }}
+						<span class='text-dark'>{{ form_label(registrationForm.agreeTerms) }}</span>
+					{{ form_errors(registrationForm.agreeTerms) }}
+					</div>
+
+					<div class="d-grid gap-2 col-6 mx-auto">
+						<button type="submit" class="btn btn-primary">S'inscrire</button>
+					</div>
+
+
+					{{ form_end(registrationForm) }}
+				</section>
+			</div>
+		</div>
+	</div>
+{% endblock %}

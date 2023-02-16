@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact |
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container">
+		<h1 class="text-center fst-italic">Contact</h1>
+		<p class='fw-bold text-center'>Vous pouvez nous contacter via le formulaire ci-dessous</p>
+		<div class="row">
+			<div class="col-6 m-auto">
+				{{ form_start(contactForm) }}
+
+				{# Affichage des messages flash#}
+
+				{% for message in app.flashes('success') %}
+					<div class="alert alert-success text-center fw-bold">
+						{{ message }}
+					</div>
+				{% endfor %}
+
+				{% for message in app.flashes('danger') %}
+					<div class="alert alert-danger text-center fw-bold">
+						{{ message }}
+					</div>
+				{% endfor %}
+
+
+				<div class="text-danger listcircle">
+					{{ form_widget(contactForm.full_name) }}
+					{{ form_errors(contactForm.full_name) }}
+				</div>
+
+				<div class="text-danger listcircle">
+					{{ form_widget(contactForm.subject) }}
+                    {{ form_errors(contactForm.subject) }}
+				</div>
+
+				<div class="text-danger listcircle">
+					{{ form_widget(contactForm.email) }}
+                    {{ form_errors(contactForm.email) }}
+				</div>
+
+				<div class="text-danger listcircle">
+					{{ form_widget(contactForm.message) }}
+                    {{ form_errors(contactForm.message) }}
+				</div>
+
+
+				{{ form_end(contactForm) }}
+
+
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+{% if(title) %}
+	<h1 class='text-center mb-3'>{{ title }}</h1>
+{% endif %}
+
+{{ form_widget(form) }}
+<div class="d-grid gap-2 col-6 mx-auto">
+	<button class="btn btn-lg btn-success mt-4">{{ button_label|default('Ajouter') }}</button>
+</div>
+{{ form_end(form) }}
