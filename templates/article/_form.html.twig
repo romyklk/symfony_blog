@@ -1,10 +1,39 @@
 {{ form_start(form) }}
-{% if(title) %}
+{% if(title is defined) %}
 	<h1 class='text-center mb-3'>{{ title }}</h1>
 {% endif %}
+<div class="text-danger listcircle">
+{{ form_widget(form.title) }}
+{{ form_errors(form.title) }}
+</div>
+<div class="text-danger listcircle">
+{{ form_widget(form.content) }}
+<span class='d-block mt-2'>{{ form_errors(form.content) }}</span>
+</div>
+{# Si le champs image est requis alors je suis das le cas d'un ajout #}
+{% if required is defined %}
+	{{ form_row(form.imageFile,{attr:{required:required}}) }}
 
-{{ form_widget(form) }}
-<div class="d-grid gap-2 col-6 mx-auto">
+{%  else %} {# on est dans le cas d'une modification #}
+	{{ form_row(form.imageFile) }}
+{% endif %}
+
+{# Si  article.imageUrl n'est pas vide alors dej'affiche l'image#}
+{% if not article.imageUrl ==""  %}
+	<img src="{{ asset(article.imageUrl) }}" alt="image de l'article" class="img-fluid" style='height:100px;width:100px;aspect-ratio:3/2;'>
+{% endif %}
+
+<div class="listcircle">
+{{ form_row(form.categories) }}
+{{ form_errors(form.categories) }}
+</div>
+<div class="d-flex gap-3 col-6 mx-auto">
 	<button class="btn btn-lg btn-success mt-4">{{ button_label|default('Ajouter') }}</button>
+	<a href="{{ path('app_article_index') }}" class="btn btn-lg btn-danger mt-4">Annuler</a>
 </div>
 {{ form_end(form) }}
+
+
+
+
+

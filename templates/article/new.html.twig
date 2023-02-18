@@ -37,7 +37,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-8 m-auto">
-				{{ include('article/_form.html.twig',{title:'Ajouter un article'}) }}
+				{{ include('article/_form.html.twig',{title:'Ajouter un article',required:"required"}) }}
 			</div>
 
 
@@ -61,11 +61,10 @@ $('.choice_select').select2();
 });
 
 // Ajout du script sur l'élement qui a la classe ckeditor (ckeditor)
-
 ClassicEditor.create(document.querySelector('#article_content')).then(editor => {
-console.log(editor);
-}).catch(error => {
-console.error(error);
-});
+      					  console.log(editor);
+				}).catch(error => {
+					console.error(error);
+				});
 		</script>
 	{% endblock %}

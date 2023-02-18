@@ -19,18 +19,22 @@
 				<div class="card-body">
 					<h5 class="card-title text-center">{{article.title}}</h5>
 
-					<h6 class="card-subtitle mb-2 text-dark badge badge bg-warning text-dark">
-						{% set categoryName ="" %} {# je déclare une variable vide  qui va contenir le nom de la catégorie#}
+					<h6 class="card-subtitle mb-2 text-dark">
+						{% set categoryName ="" %}
+						{# je déclare une variable vide  qui va contenir le nom de la catégorie#}
 
 						{% for category in article.categories %}
-							{{category.name}}
 
-							{% set categoryName = category.name %} {# je stocke le nom de la catégorie dans la variable categoryName#}
+							<a href="/category/{{category.name}}" class="badge badge bg-info text-capitalize text-wrap text-decoration-none">{{category.name}}
+							</a>
+
+							{% set categoryName = category.name %}
+							{# je stocke le nom de la catégorie dans la variable categoryName#}
 						{% endfor %}
 					</h6>
 
 
-					<p class="card-text">{{article.content  }}</p>
+					<p class="card-text">{{article.content | raw }}</p>
 
 
 					<footer class="blockquote-footer fw-bold author-name mt-4">
@@ -40,20 +44,31 @@
 						{{article.author.fullname}}
 					</footer>
 
+					{#Vérifier si l'utilisateur connecté est celui qui a créer l'article#}
+
+					{% if app.user is same as (article.author) %}
+
+						<div class="d-flex justify-content-evenly">
+							<a href="{{path('app_article_edit', {'id':article.id})}}" class="btn btn-warning mt-5">Modifier l'article</a>							
+						</div>
+					{% endif %}
+
 
 					<div class="card-footer text-center border-0 bg-white">
 						<small class="text-muted fw-bold">
+							{#Afficher le nombre d'article dans chaque catégorie#}
 							{% for category in article.categories %}
-								{{category.articles|length}} articles publiés dans la catégorie {{categoryName}}
-								
+								{{category.name}} ({{category.articles|length}} articles publiés)<br>
 							{% endfor %}
+
+							
 						</small>
 					</div>
 
 					<div class="d-flex justify-content-evenly">
-					<a href="{{path('app_home')}}" class="btn btn-primary mt-5">Retourné à l'accueil</a>
+						<a href="{{path('app_home')}}" class="btn btn-primary mt-5">Retourné à l'accueil</a>
 
-					<a href="/category/{{categoryName}}" class="btn btn-dark mt-5">Retourné à la catégorie</a>
+						<a href="/category/{{categoryName}}" class="btn btn-dark mt-5">Retourné à la catégorie</a>
 					</div>
 				</div>
 			</div>

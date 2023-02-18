@@ -27,12 +27,18 @@
 
 				<div class="card m-1" style="width: 22rem;">
 					<img src="{{asset(article.imageUrl)}}" class="card-img-top" alt="image article {{article.title}}" style="aspect-ratio:3/2">
+					
 					<div class="card-body">
 						<h5 class="card-title">{{article.title}}</h5>
 
                         <h6 class="card-subtitle mb-2 text-muted author-name">
+						{# on affiche l'image de profil de l'auteur de l'article s'il existe #}
+						{% if article.author.profile.picture is defined %}
                         <img src="{{asset(article.author.profile.picture)}}" class="card-img-top rounded-circle" alt="profil {{article.author.fullname}}" style="width: 50px;">
-
+						{% else %}
+						<img src="../assets/images/profil/default.png" class="card-img-top rounded-circle" alt="profil {{article.author.fullname}}" style="width: 50px;">
+						{% endif %}
+							
                         {{article.author.fullname}}
                         </h6>
 

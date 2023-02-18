@@ -1,45 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article index{% endblock %}
+{% block title %}Mes articles |
+	{{parent()}}
+{% endblock %}
 
 {% block body %}
-    <h1 class='text-center mb-3'>Vos publications d'article</h1>
+	<h1 class='text-center mb-3'>Vos publications d'article</h1>
 
-    <table class="table mt-4 table-hover table-striped">
-        <thead class='table table-dark table-striped'>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Contenu</th>
-                <th>Image</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>Slug</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.title }}</td>
-                <td>{{ article.content }}</td>
-                <td>{{ article.imageUrl }}</td>
-                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ article.slug }}</td>
-                <td>
-                    <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">Vous n'avez pas d'article</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<a href="{{ path('app_article_new') }}" class="btn btn-primary">Créer un nouvel article</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 w-100">
+				<table class="table mt-4 table-hover table-striped">
+					<thead class='table table-dark table-striped'>
+						<tr>
+							<th>Id</th>
+							<th scope="col" width="20%">Titre</th>
+							<th scope="col" width="40%">Contenu</th>
+							<th>Image</th>
+							<th>CreatedAt</th>
+							<th>actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for article in articles %}
+							<tr>
+								<td>{{ article.id }}</td>
+								<td class='article-title'>{{ article.title }}</td>
+								<td class='article-description'>{{ article.content | raw }}</td>
+								<td><img src="{{ article.imageUrl }}" alt="{{ article.title }}" style='aspect-ratio:3/2;width:100px;'></td>
+								<td>{{ article.createdAt ? article.createdAt|date('m/d/Y') : '' }}</td>
+								<td>
+									<div class="row d-flex">
+										<div class="col-4">
+											<a href="{{ path('app_article_show', {'id': article.id}) }}">
+												<i class="bi bi-eye text-success" style="font-size: 25px;"></i>
+											</a>
+										</div>
+										<div class="col-4">
+											<a href="{{ path('app_article_edit', {'id': article.id}) }}" style="font-size: 25px;">
+												<i class="bi bi-pencil text-warning"></i>
+											</a>
+										</div>
+										<div class="col-4">
+											{{ include('article/_delete_form.html.twig') }}
+										</div>
+									</div>
 
-    <a href="{{ path('app_article_new') }}" class='btn btn-primary'>Ajouter un article</a>
+
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="8">Vous n'avez pas d'article</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+$('.article-description').each(function () {
+$(this).text($(this).text().substring(0, 300) + '...');
+});
+});
+
+$(document).ready(function () {
+$('.article-title').each(function () {
+$(this).text($(this).text().substring(0, 30) + '...');
+});
+});
+	</script>
 {% endblock %}
